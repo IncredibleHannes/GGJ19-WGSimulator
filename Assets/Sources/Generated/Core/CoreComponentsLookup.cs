@@ -10,16 +10,31 @@ public static class CoreComponentsLookup {
 
     public const int CoreDestroyedListener = 0;
     public const int Destroyed = 1;
+    public const int DirtLevel = 2;
+    public const int Position = 3;
+    public const int Room = 4;
+    public const int RoomId = 5;
+    public const int RoomType = 6;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
         "CoreDestroyedListener",
-        "Destroyed"
+        "Destroyed",
+        "DirtLevel",
+        "Position",
+        "Room",
+        "RoomId",
+        "RoomType"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(CoreDestroyedListenerComponent),
-        typeof(DestroyedComponent)
+        typeof(DestroyedComponent),
+        typeof(DirtLevelComponent),
+        typeof(PositionComponent),
+        typeof(RoomComponent),
+        typeof(RoomIdComponent),
+        typeof(RoomTypeComponent)
     };
 }
