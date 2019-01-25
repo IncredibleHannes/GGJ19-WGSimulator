@@ -62,10 +62,16 @@ public partial class Contexts : Entitas.IContexts {
 //------------------------------------------------------------------------------
 public partial class Contexts {
 
+    public const string CurrentRoom = "CurrentRoom";
     public const string RoomId = "RoomId";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
     public void InitializeEntityIndices() {
+        core.AddEntityIndex(new Entitas.EntityIndex<CoreEntity, int>(
+            CurrentRoom,
+            core.GetGroup(CoreMatcher.CurrentRoom),
+            (e, c) => ((CurrentRoomComponent)c).roomId));
+
         core.AddEntityIndex(new Entitas.PrimaryEntityIndex<CoreEntity, int>(
             RoomId,
             core.GetGroup(CoreMatcher.RoomId),
@@ -74,6 +80,10 @@ public partial class Contexts {
 }
 
 public static class ContextsExtensions {
+
+    public static System.Collections.Generic.HashSet<CoreEntity> GetEntitiesWithCurrentRoom(this CoreContext context, int roomId) {
+        return ((Entitas.EntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.CurrentRoom)).GetEntities(roomId);
+    }
 
     public static CoreEntity GetEntityWithRoomId(this CoreContext context, int value) {
         return ((Entitas.PrimaryEntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.RoomId)).GetEntity(value);

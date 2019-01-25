@@ -9,17 +9,20 @@
 public static class CommandComponentsLookup {
 
     public const int CommandDestroyedListener = 0;
-    public const int Destroyed = 1;
+    public const int CreateRoomCommand = 1;
+    public const int Destroyed = 2;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
         "CommandDestroyedListener",
+        "CreateRoomCommand",
         "Destroyed"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(CommandDestroyedListenerComponent),
+        typeof(CreateRoomCommandComponent),
         typeof(DestroyedComponent)
     };
 }

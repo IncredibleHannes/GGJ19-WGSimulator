@@ -11,17 +11,17 @@ public partial class CoreEntity {
     public RoomTypeComponent roomType { get { return (RoomTypeComponent)GetComponent(CoreComponentsLookup.RoomType); } }
     public bool hasRoomType { get { return HasComponent(CoreComponentsLookup.RoomType); } }
 
-    public void AddRoomType(string newValue) {
+    public void AddRoomType(Room newRoom) {
         var index = CoreComponentsLookup.RoomType;
         var component = (RoomTypeComponent)CreateComponent(index, typeof(RoomTypeComponent));
-        component.value = newValue;
+        component.room = newRoom;
         AddComponent(index, component);
     }
 
-    public void ReplaceRoomType(string newValue) {
+    public void ReplaceRoomType(Room newRoom) {
         var index = CoreComponentsLookup.RoomType;
         var component = (RoomTypeComponent)CreateComponent(index, typeof(RoomTypeComponent));
-        component.value = newValue;
+        component.room = newRoom;
         ReplaceComponent(index, component);
     }
 

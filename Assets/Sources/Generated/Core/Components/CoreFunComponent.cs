@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class CoreEntity {
 
-    public DirtLevelComponent dirtLevel { get { return (DirtLevelComponent)GetComponent(CoreComponentsLookup.DirtLevel); } }
-    public bool hasDirtLevel { get { return HasComponent(CoreComponentsLookup.DirtLevel); } }
+    public FunComponent fun { get { return (FunComponent)GetComponent(CoreComponentsLookup.Fun); } }
+    public bool hasFun { get { return HasComponent(CoreComponentsLookup.Fun); } }
 
-    public void AddDirtLevel(float newValue) {
-        var index = CoreComponentsLookup.DirtLevel;
-        var component = (DirtLevelComponent)CreateComponent(index, typeof(DirtLevelComponent));
+    public void AddFun(float newValue) {
+        var index = CoreComponentsLookup.Fun;
+        var component = (FunComponent)CreateComponent(index, typeof(FunComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDirtLevel(float newValue) {
-        var index = CoreComponentsLookup.DirtLevel;
-        var component = (DirtLevelComponent)CreateComponent(index, typeof(DirtLevelComponent));
+    public void ReplaceFun(float newValue) {
+        var index = CoreComponentsLookup.Fun;
+        var component = (FunComponent)CreateComponent(index, typeof(FunComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveDirtLevel() {
-        RemoveComponent(CoreComponentsLookup.DirtLevel);
+    public void RemoveFun() {
+        RemoveComponent(CoreComponentsLookup.Fun);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class CoreEntity {
 //------------------------------------------------------------------------------
 public sealed partial class CoreMatcher {
 
-    static Entitas.IMatcher<CoreEntity> _matcherDirtLevel;
+    static Entitas.IMatcher<CoreEntity> _matcherFun;
 
-    public static Entitas.IMatcher<CoreEntity> DirtLevel {
+    public static Entitas.IMatcher<CoreEntity> Fun {
         get {
-            if (_matcherDirtLevel == null) {
-                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.DirtLevel);
+            if (_matcherFun == null) {
+                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.Fun);
                 matcher.componentNames = CoreComponentsLookup.componentNames;
-                _matcherDirtLevel = matcher;
+                _matcherFun = matcher;
             }
 
-            return _matcherDirtLevel;
+            return _matcherFun;
         }
     }
 }

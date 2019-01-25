@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class CoreEntity {
 
-    public DirtLevelComponent dirtLevel { get { return (DirtLevelComponent)GetComponent(CoreComponentsLookup.DirtLevel); } }
-    public bool hasDirtLevel { get { return HasComponent(CoreComponentsLookup.DirtLevel); } }
+    public MotivationComponent motivation { get { return (MotivationComponent)GetComponent(CoreComponentsLookup.Motivation); } }
+    public bool hasMotivation { get { return HasComponent(CoreComponentsLookup.Motivation); } }
 
-    public void AddDirtLevel(float newValue) {
-        var index = CoreComponentsLookup.DirtLevel;
-        var component = (DirtLevelComponent)CreateComponent(index, typeof(DirtLevelComponent));
+    public void AddMotivation(float newValue) {
+        var index = CoreComponentsLookup.Motivation;
+        var component = (MotivationComponent)CreateComponent(index, typeof(MotivationComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceDirtLevel(float newValue) {
-        var index = CoreComponentsLookup.DirtLevel;
-        var component = (DirtLevelComponent)CreateComponent(index, typeof(DirtLevelComponent));
+    public void ReplaceMotivation(float newValue) {
+        var index = CoreComponentsLookup.Motivation;
+        var component = (MotivationComponent)CreateComponent(index, typeof(MotivationComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveDirtLevel() {
-        RemoveComponent(CoreComponentsLookup.DirtLevel);
+    public void RemoveMotivation() {
+        RemoveComponent(CoreComponentsLookup.Motivation);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class CoreEntity {
 //------------------------------------------------------------------------------
 public sealed partial class CoreMatcher {
 
-    static Entitas.IMatcher<CoreEntity> _matcherDirtLevel;
+    static Entitas.IMatcher<CoreEntity> _matcherMotivation;
 
-    public static Entitas.IMatcher<CoreEntity> DirtLevel {
+    public static Entitas.IMatcher<CoreEntity> Motivation {
         get {
-            if (_matcherDirtLevel == null) {
-                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.DirtLevel);
+            if (_matcherMotivation == null) {
+                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.Motivation);
                 matcher.componentNames = CoreComponentsLookup.componentNames;
-                _matcherDirtLevel = matcher;
+                _matcherMotivation = matcher;
             }
 
-            return _matcherDirtLevel;
+            return _matcherMotivation;
         }
     }
 }

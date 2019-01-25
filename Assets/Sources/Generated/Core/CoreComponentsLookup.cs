@@ -8,20 +8,28 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentsLookup {
 
-    public const int CoreDestroyedListener = 0;
-    public const int Destroyed = 1;
-    public const int DirtLevel = 2;
-    public const int Position = 3;
-    public const int Room = 4;
-    public const int RoomId = 5;
-    public const int RoomType = 6;
+    public const int ActiveAction = 0;
+    public const int CoreDestroyedListener = 1;
+    public const int CurrentRoom = 2;
+    public const int Destroyed = 3;
+    public const int DirtLevel = 4;
+    public const int Fun = 5;
+    public const int Motivation = 6;
+    public const int Position = 7;
+    public const int Room = 8;
+    public const int RoomId = 9;
+    public const int RoomType = 10;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
+        "ActiveAction",
         "CoreDestroyedListener",
+        "CurrentRoom",
         "Destroyed",
         "DirtLevel",
+        "Fun",
+        "Motivation",
         "Position",
         "Room",
         "RoomId",
@@ -29,9 +37,13 @@ public static class CoreComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(ActiveActionComponent),
         typeof(CoreDestroyedListenerComponent),
+        typeof(CurrentRoomComponent),
         typeof(DestroyedComponent),
         typeof(DirtLevelComponent),
+        typeof(FunComponent),
+        typeof(MotivationComponent),
         typeof(PositionComponent),
         typeof(RoomComponent),
         typeof(RoomIdComponent),
