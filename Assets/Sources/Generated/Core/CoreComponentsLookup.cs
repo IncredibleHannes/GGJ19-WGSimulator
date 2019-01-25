@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentsLookup {
 
+    public const int CoreDestroyedListener = 0;
+    public const int Destroyed = 1;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-
+        "CoreDestroyedListener",
+        "Destroyed"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(CoreDestroyedListenerComponent),
+        typeof(DestroyedComponent)
     };
 }

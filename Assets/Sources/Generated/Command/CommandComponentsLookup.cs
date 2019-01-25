@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class CommandComponentsLookup {
 
+    public const int CommandDestroyedListener = 0;
+    public const int Destroyed = 1;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-
+        "CommandDestroyedListener",
+        "Destroyed"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(CommandDestroyedListenerComponent),
+        typeof(DestroyedComponent)
     };
 }

@@ -8,15 +8,18 @@
 //------------------------------------------------------------------------------
 public static class ViewComponentsLookup {
 
+    public const int Destroyed = 0;
+    public const int ViewDestroyedListener = 1;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 2;
 
     public static readonly string[] componentNames = {
-
+        "Destroyed",
+        "ViewDestroyedListener"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(DestroyedComponent),
+        typeof(ViewDestroyedListenerComponent)
     };
 }
