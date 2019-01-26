@@ -13,14 +13,18 @@ public static class CoreComponentsLookup {
     public const int CurrentRoom = 2;
     public const int Destroyed = 3;
     public const int DirtLevel = 4;
-    public const int Fun = 5;
-    public const int Motivation = 6;
-    public const int Position = 7;
-    public const int Room = 8;
-    public const int RoomId = 9;
-    public const int RoomType = 10;
+    public const int Flatmate = 5;
+    public const int FlatmateId = 6;
+    public const int Fun = 7;
+    public const int Motivation = 8;
+    public const int Name = 9;
+    public const int Player = 10;
+    public const int Position = 11;
+    public const int Room = 12;
+    public const int RoomId = 13;
+    public const int RoomType = 14;
 
-    public const int TotalComponents = 11;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "ActiveAction",
@@ -28,8 +32,12 @@ public static class CoreComponentsLookup {
         "CurrentRoom",
         "Destroyed",
         "DirtLevel",
+        "Flatmate",
+        "FlatmateId",
         "Fun",
         "Motivation",
+        "Name",
+        "Player",
         "Position",
         "Room",
         "RoomId",
@@ -42,8 +50,12 @@ public static class CoreComponentsLookup {
         typeof(CurrentRoomComponent),
         typeof(DestroyedComponent),
         typeof(DirtLevelComponent),
+        typeof(FlatmateComponent),
+        typeof(FlatmateIdComponent),
         typeof(FunComponent),
         typeof(MotivationComponent),
+        typeof(NameComponent),
+        typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(RoomComponent),
         typeof(RoomIdComponent),

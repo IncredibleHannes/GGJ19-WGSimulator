@@ -19,6 +19,8 @@ public sealed class UpdateRoomDirtLevelSystem : IExecuteSystem
             var roomActions = contexts.core.GetEntitiesWithCurrentRoom(room.roomId.value);
             foreach (var action in roomActions)
             {
+                if (!action.hasActiveAction) continue;
+
                 Action a = action.activeAction.value;
                 room.ReplaceDirtLevel(room.dirtLevel.value + a.DirtPerTick);
             }

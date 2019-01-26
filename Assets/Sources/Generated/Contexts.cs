@@ -63,6 +63,7 @@ public partial class Contexts : Entitas.IContexts {
 public partial class Contexts {
 
     public const string CurrentRoom = "CurrentRoom";
+    public const string FlatmateId = "FlatmateId";
     public const string RoomId = "RoomId";
 
     [Entitas.CodeGeneration.Attributes.PostConstructor]
@@ -71,6 +72,11 @@ public partial class Contexts {
             CurrentRoom,
             core.GetGroup(CoreMatcher.CurrentRoom),
             (e, c) => ((CurrentRoomComponent)c).roomId));
+
+        core.AddEntityIndex(new Entitas.PrimaryEntityIndex<CoreEntity, int>(
+            FlatmateId,
+            core.GetGroup(CoreMatcher.FlatmateId),
+            (e, c) => ((FlatmateIdComponent)c).flatmateId));
 
         core.AddEntityIndex(new Entitas.PrimaryEntityIndex<CoreEntity, int>(
             RoomId,
@@ -83,6 +89,10 @@ public static class ContextsExtensions {
 
     public static System.Collections.Generic.HashSet<CoreEntity> GetEntitiesWithCurrentRoom(this CoreContext context, int roomId) {
         return ((Entitas.EntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.CurrentRoom)).GetEntities(roomId);
+    }
+
+    public static CoreEntity GetEntityWithFlatmateId(this CoreContext context, int flatmateId) {
+        return ((Entitas.PrimaryEntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.FlatmateId)).GetEntity(flatmateId);
     }
 
     public static CoreEntity GetEntityWithRoomId(this CoreContext context, int value) {
