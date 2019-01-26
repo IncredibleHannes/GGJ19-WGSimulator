@@ -17,7 +17,7 @@ public class DecideActionSystem : IExecuteSystem
         context = contexts.core;
         command = contexts.command;
         rooms = context.GetGroup(CoreMatcher.RoomId);
-        flatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.Flatmate, CoreMatcher.Motivation, CoreMatcher.Fun, CoreMatcher.CurrentRoom, CoreMatcher.Opinion).NoneOf(CoreMatcher.Player, CoreMatcher.ActiveAction));
+        flatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.AIBehaviour, CoreMatcher.Flatmate, CoreMatcher.Motivation, CoreMatcher.Fun, CoreMatcher.CurrentRoom, CoreMatcher.Opinion).NoneOf(CoreMatcher.Player, CoreMatcher.ActiveAction));
     }
 
     public void Execute()
@@ -31,7 +31,7 @@ public class DecideActionSystem : IExecuteSystem
                 totalDirtyness += room.dirtLevel.value;
                 roomDirtyness.Add(room.roomId.value, room.dirtLevel.value);
             }
-            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, new AIBehaviour(0.3f, 0.5f, 2, 2), flatmate.currentRoom.roomId);
+            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, flatmate.aIBehaviour.value, flatmate.currentRoom.roomId);
             AIAction nextAction = decideNextAction(s);
             if (nextAction == null)
             {
