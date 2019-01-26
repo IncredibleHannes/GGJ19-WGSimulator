@@ -58,7 +58,7 @@ public sealed class UpdateEnterRoomDirtynessOpinionSystem : ReactiveSystem<CoreE
                 int victimIndex = random.Next(potentialVictims.Count);
                 victim = potentialVictims[victimIndex];
             }
-            Debug.Log("Victim is #" + victim);
+
             var modifier = e.opinionModifier;
 
             float opinionDelta = 0;

@@ -26,8 +26,9 @@ public static class CoreComponentsLookup {
     public const int Room = 15;
     public const int RoomId = 16;
     public const int RoomType = 17;
+    public const int TimeSinceLastTick = 18;
 
-    public const int TotalComponents = 18;
+    public const int TotalComponents = 19;
 
     public static readonly string[] componentNames = {
         "ActiveAction",
@@ -47,7 +48,8 @@ public static class CoreComponentsLookup {
         "Position",
         "Room",
         "RoomId",
-        "RoomType"
+        "RoomType",
+        "TimeSinceLastTick"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -68,6 +70,7 @@ public static class CoreComponentsLookup {
         typeof(PositionComponent),
         typeof(RoomComponent),
         typeof(RoomIdComponent),
-        typeof(RoomTypeComponent)
+        typeof(RoomTypeComponent),
+        typeof(TimeSinceLastTickComponent)
     };
 }

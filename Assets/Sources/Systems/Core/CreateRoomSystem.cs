@@ -28,7 +28,7 @@ public sealed class CreateRoomSystem : ReactiveSystem<CommandEntity>
             room.isRoom = true;
             room.ReplaceRoomType(e.createRoomCommand.roomType);
             room.ReplaceRoomId(room.creationIndex);
-            room.ReplaceDirtLevel(0);
+            room.ReplaceDirtLevel(10000);
             room.AddLastCleanup(new List<int>());
 
             e.isDestroyed = true;

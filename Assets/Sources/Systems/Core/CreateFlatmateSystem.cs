@@ -30,7 +30,7 @@ public sealed class CreateFlatmateSystem : ReactiveSystem<CommandEntity>
             flatmate.isFlatmate = true;
             flatmate.AddFlatmateId(flatmate.creationIndex);
             flatmate.AddName(command.name);
-            flatmate.AddMotivation(0);
+            flatmate.AddMotivation(100);
             flatmate.AddFun(0);
             flatmate.AddCurrentRoom(command.startingRoomId);
             flatmate.AddOpinion(new Dictionary<int, float>());

@@ -1,12 +1,12 @@
 using Entitas;
 
-public sealed class UpdateSameRoomOptionionSystem : IExecuteSystem
+public sealed class UpdateSameRoomOpinionSystem : IExecuteSystem
 {
     private readonly Contexts contexts;
     private readonly IGroup<CoreEntity> actingFlatmates;
     private readonly IGroup<CoreEntity> opiniatedFlatmates;
 
-    public UpdateSameRoomOptionionSystem(Contexts contexts)
+    public UpdateSameRoomOpinionSystem(Contexts contexts)
     {
         this.contexts = contexts;
 
@@ -24,7 +24,7 @@ public sealed class UpdateSameRoomOptionionSystem : IExecuteSystem
 
             foreach (var opiniatedFlatmate in opiniatedFlatmates)
             {
-                if (opiniatedFlatmate.roomId.value != roomId) continue;
+                if (opiniatedFlatmate.currentRoom.roomId != roomId) continue;
 
                 float opinionMultiplier = opiniatedFlatmate.hasOpinionModifier
                     ? opiniatedFlatmate.opinionModifier.baseOpinionMultiplier * opiniatedFlatmate.opinionModifier.sameRoomOpinionMultiplier
@@ -33,7 +33,7 @@ public sealed class UpdateSameRoomOptionionSystem : IExecuteSystem
                 float currentOpinion = opiniatedFlatmate.opinion.value.GetOrDefault(flatmateId, 0f);
                 var opinions = opiniatedFlatmate.opinion.value;
 
-                opinions[flatmateId] = currentOpinion + activeAction.BaseOpinionPerSecond * opinionMultiplier * contexts.input.deltaT.value;
+                opinions[flatmateId] = currentOpinion + activeAction.BaseOpinionPerSecond * opinionMultiplier * contexts.core.timeSinceLastTick.value;
 
                 opiniatedFlatmate.ReplaceOpinion(opinions);
             }

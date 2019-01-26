@@ -18,7 +18,7 @@ public class UpdateFunSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            e.ReplaceFun(e.fun.value + e.activeAction.value.FunPerSecond);
+            e.ReplaceFun(e.fun.value + e.activeAction.value.FunPerSecond * context.timeSinceLastTick.value);
         }
     }
 }

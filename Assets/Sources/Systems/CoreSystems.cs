@@ -2,6 +2,8 @@ public sealed class CoreSystems : Feature
 {
     public CoreSystems(Contexts contexts)
     {
+        Add(new UpdateTimeSinceLastTickSystem(contexts));
+
         Add(new CreateRoomSystem(contexts));
         Add(new CreateFlatmateSystem(contexts));
 
@@ -14,7 +16,7 @@ public sealed class CoreSystems : Feature
         Add(new UpdateMotivationSystem(contexts));
         Add(new UpdateFunSystem(contexts));
         Add(new UpdateRoomDirtLevelSystem(contexts));
-        Add(new UpdateSameRoomOptionionSystem(contexts));
-        Add(new UpdateOtherRoomOptionionSystem(contexts));
+        Add(new UpdateSameRoomOpinionSystem(contexts));
+        Add(new UpdateOtherRoomOpinionSystem(contexts));
     }
 }

@@ -18,7 +18,7 @@ public class UpdateMotivationSystem : IExecuteSystem
     {
         foreach (var e in entities)
         {
-            e.ReplaceMotivation(e.motivation.value + e.activeAction.value.MotivationPerSecond);
+            e.ReplaceMotivation(e.motivation.value + e.activeAction.value.MotivationPerSecond * context.timeSinceLastTick.value);
         }
     }
 }

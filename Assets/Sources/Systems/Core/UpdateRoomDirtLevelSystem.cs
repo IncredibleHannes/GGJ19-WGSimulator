@@ -22,7 +22,7 @@ public sealed class UpdateRoomDirtLevelSystem : IExecuteSystem
                 if (!action.hasActiveAction) continue;
 
                 Action a = action.activeAction.value;
-                room.ReplaceDirtLevel(room.dirtLevel.value + a.DirtPerSecond);
+                room.ReplaceDirtLevel(room.dirtLevel.value + a.DirtPerSecond * contexts.core.timeSinceLastTick.value);
             }
         }
     }
