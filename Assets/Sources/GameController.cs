@@ -25,6 +25,7 @@ public class GameController : MonoBehaviour
         var commandContext = contexts.command;
 
         commandContext.CreateEntity().AddCreateRoomCommand(new Room("Living Room"));
+        commandContext.CreateEntity().AddCreateRoomCommand(new Room("Dining Room"));
         commandContext.CreateEntity().AddCreateFlatmateCommand("Mate", 0);
         commandContext.CreateEntity().AddCreateFlatmateCommand("Dude", 0);
     }

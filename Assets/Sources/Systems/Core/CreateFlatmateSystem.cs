@@ -34,6 +34,7 @@ public sealed class CreateFlatmateSystem : ReactiveSystem<CommandEntity>
             flatmate.AddFun(0);
             flatmate.AddCurrentRoom(command.startingRoomId);
             flatmate.AddOpinion(new Dictionary<int, float>());
+            flatmate.AddOpinionModifier(1, 1, 1, 1, 1, 1, 1);
 
             e.isDestroyed = true;
         }
