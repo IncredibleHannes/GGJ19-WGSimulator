@@ -9,7 +9,7 @@ public class DecideActionSystem : IExecuteSystem
     readonly IGroup<CoreEntity> flatmates;
     readonly IGroup<CoreEntity> rooms;
 
-    private int SEARCH_DEPTH = 2;
+    private int SEARCH_DEPTH = 5;
     private int DEFAULT_ACTION_LENGTH = 5;
 
     public DecideActionSystem(Contexts contexts)
@@ -29,7 +29,7 @@ public class DecideActionSystem : IExecuteSystem
             {
                 totalDirtyness += room.dirtLevel.value;
             }
-            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, totalDirtyness, 1, 1, 1, 1);
+            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, totalDirtyness, 0, 0, 0, 1);
             AIAction nextAction = decideNextAction(s);
             if (nextAction.room != flatmate.currentRoom.roomId)
             {
@@ -48,6 +48,7 @@ public class DecideActionSystem : IExecuteSystem
         foreach (var action in possibleAcions)
         {
             float score = findBestAction(applyAction(action, s), SEARCH_DEPTH);
+            Debug.Log(action.action.Title + score);
             if (maxScore < score)
             {
                 maxScore = score;
@@ -63,8 +64,7 @@ public class DecideActionSystem : IExecuteSystem
         var result = new List<AIAction>();
         foreach (var action in Action.Actions)
         {
-            Debug.Log(action);
-            if ((action.MotivationPerSecond * DEFAULT_ACTION_LENGTH) >= s.motivation)
+            if (-(action.MotivationPerSecond * DEFAULT_ACTION_LENGTH) <= s.motivation)
             {
                 foreach (var room in rooms)
                 {
@@ -84,7 +84,7 @@ public class DecideActionSystem : IExecuteSystem
         {
             opinion += entry.Value;
         }
-        return s.motivation * s.motivationMultiplyer + s.fun * s.funMultiplyer + s.opinionMultiplyer * opinion;
+        return s.motivation * s.motivationMultiplyer + s.fun * s.funMultiplyer + s.opinionMultiplyer * opinion - s.totalDirtyness * s.dirtynessMultiplayer;
     }
 
     private float findBestAction(State s, int searchDepth)
@@ -119,8 +119,7 @@ public class DecideActionSystem : IExecuteSystem
         float newMotivation = a.action.MotivationPerSecond * DEFAULT_ACTION_LENGTH + s.motivation;
         float newFun = a.action.FunPerSecond * DEFAULT_ACTION_LENGTH + s.fun;
         float newDirtyness = a.action.DirtPerSecond * DEFAULT_ACTION_LENGTH + s.totalDirtyness;
-        Dictionary<int, float> newOpinion = new Dictionary<int, float>();
+        Dictionary<int, float> newOpinion = s.opinion;
         return new State(newMotivation, newFun, newOpinion, newDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer);
     }
 }
-
