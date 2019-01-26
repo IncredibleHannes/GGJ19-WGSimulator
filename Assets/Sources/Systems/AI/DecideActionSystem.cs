@@ -9,7 +9,7 @@ public class DecideActionSystem : IExecuteSystem
     readonly IGroup<CoreEntity> flatmates;
     readonly IGroup<CoreEntity> rooms;
 
-    private int SEARCH_DEPTH = 5;
+    private int SEARCH_DEPTH = 4;
     private int DEFAULT_ACTION_LENGTH = 5;
 
     public DecideActionSystem(Contexts contexts)

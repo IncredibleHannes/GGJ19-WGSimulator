@@ -9,17 +9,19 @@
 public static class CommandComponentsLookup {
 
     public const int CommandDestroyedListener = 0;
-    public const int CreateFlatmateCommand = 1;
-    public const int CreateRoomCommand = 2;
-    public const int Destroyed = 3;
-    public const int EnterRoomCommand = 4;
-    public const int StartActionCommand = 5;
-    public const int StopActionCommand = 6;
+    public const int CreateFlatCommand = 1;
+    public const int CreateFlatmateCommand = 2;
+    public const int CreateRoomCommand = 3;
+    public const int Destroyed = 4;
+    public const int EnterRoomCommand = 5;
+    public const int StartActionCommand = 6;
+    public const int StopActionCommand = 7;
 
-    public const int TotalComponents = 7;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "CommandDestroyedListener",
+        "CreateFlatCommand",
         "CreateFlatmateCommand",
         "CreateRoomCommand",
         "Destroyed",
@@ -30,6 +32,7 @@ public static class CommandComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(CommandDestroyedListenerComponent),
+        typeof(CreateFlatCommandComponent),
         typeof(CreateFlatmateCommandComponent),
         typeof(CreateRoomCommandComponent),
         typeof(DestroyedComponent),

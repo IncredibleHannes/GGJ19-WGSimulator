@@ -4,4 +4,7 @@ using UnityEngine;
 
 public class FlatView : View
 {
+    public RoomView livingRoom;
+    public RoomView bathroom;
+    public RoomView kitchen;
 }

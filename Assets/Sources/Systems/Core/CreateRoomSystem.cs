@@ -27,8 +27,8 @@ public sealed class CreateRoomSystem : ReactiveSystem<CommandEntity>
             var room = coreContext.CreateEntity();
             room.isRoom = true;
             room.ReplaceRoomType(e.createRoomCommand.roomType);
-            room.ReplaceRoomId(room.creationIndex);
-            room.ReplaceDirtLevel(10000);
+            room.ReplaceRoomId(e.createRoomCommand.roomId);
+            room.ReplaceDirtLevel(0);
             room.AddLastCleanup(new List<int>());
 
             e.isDestroyed = true;

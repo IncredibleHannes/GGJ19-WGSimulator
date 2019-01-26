@@ -14,23 +14,24 @@ public static class CoreComponentsLookup {
     public const int CurrentRoom = 3;
     public const int Destroyed = 4;
     public const int DirtLevel = 5;
-    public const int Flatmate = 6;
-    public const int FlatmateId = 7;
-    public const int Fun = 8;
-    public const int LastCleanup = 9;
-    public const int Motivation = 10;
-    public const int Name = 11;
-    public const int Opinion = 12;
-    public const int OpinionModifier = 13;
-    public const int Player = 14;
-    public const int Position = 15;
-    public const int Room = 16;
-    public const int RoomId = 17;
-    public const int RoomType = 18;
-    public const int TimeOfDay = 19;
-    public const int TimeSinceLastTick = 20;
+    public const int Flat = 6;
+    public const int Flatmate = 7;
+    public const int FlatmateId = 8;
+    public const int Fun = 9;
+    public const int LastCleanup = 10;
+    public const int Motivation = 11;
+    public const int Name = 12;
+    public const int Opinion = 13;
+    public const int OpinionModifier = 14;
+    public const int Player = 15;
+    public const int Position = 16;
+    public const int Room = 17;
+    public const int RoomId = 18;
+    public const int RoomType = 19;
+    public const int TimeOfDay = 20;
+    public const int TimeSinceLastTick = 21;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "ActionDuration",
@@ -39,6 +40,7 @@ public static class CoreComponentsLookup {
         "CurrentRoom",
         "Destroyed",
         "DirtLevel",
+        "Flat",
         "Flatmate",
         "FlatmateId",
         "Fun",
@@ -63,6 +65,7 @@ public static class CoreComponentsLookup {
         typeof(CurrentRoomComponent),
         typeof(DestroyedComponent),
         typeof(DirtLevelComponent),
+        typeof(FlatComponent),
         typeof(FlatmateComponent),
         typeof(FlatmateIdComponent),
         typeof(FunComponent),
