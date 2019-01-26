@@ -16,6 +16,7 @@ public sealed class CoreSystems : Feature
         Add(new UpdateEnterRoomCleanlinessOpinionSystem(contexts));
 
         Add(new UpdateMotivationSystem(contexts));
+        Add(new CheckZeroMotivationSystem(contexts));
         Add(new UpdateFunSystem(contexts));
         Add(new UpdateRoomDirtLevelSystem(contexts));
         Add(new UpdateSameRoomOpinionSystem(contexts));
