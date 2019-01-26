@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Contexts contexts = Contexts.sharedInstance;
+        contexts.core.IdAutogenerationEnabled = true;
+
         systems = new AllSystems(Contexts.sharedInstance);
         systems.Initialize();
 

@@ -8,18 +8,27 @@
 //------------------------------------------------------------------------------
 public static class ViewComponentsLookup {
 
-    public const int Destroyed = 0;
-    public const int ViewDestroyedListener = 1;
+    public const int Asset = 0;
+    public const int CoreEntityReference = 1;
+    public const int Destroyed = 2;
+    public const int View = 3;
+    public const int ViewDestroyedListener = 4;
 
-    public const int TotalComponents = 2;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
+        "Asset",
+        "CoreEntityReference",
         "Destroyed",
+        "View",
         "ViewDestroyedListener"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(AssetComponent),
+        typeof(CoreEntityReferenceComponent),
         typeof(DestroyedComponent),
+        typeof(ViewComponent),
         typeof(ViewDestroyedListenerComponent)
     };
 }

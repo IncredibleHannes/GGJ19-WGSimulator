@@ -51,6 +51,7 @@ public class DecideActionSystem : IExecuteSystem
         var maxScore = float.MinValue;
         AIAction bestAction = null;
         var possibleAcions = getPossibleActions(s);
+        possibleAcions.Shuffle();
         foreach (var action in possibleAcions)
         {
             float score = findBestAction(applyAction(action, s), SEARCH_DEPTH);

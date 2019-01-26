@@ -6,6 +6,8 @@ public sealed class AllSystems : Feature
         Add(new CoreSystems(contexts));
         Add(new AISystems(contexts));
 
+        Add(new ViewSystems(contexts));
+
         Add(new CommandCleanupSystems(contexts));
         Add(new CoreCleanupSystems(contexts));
         Add(new ViewCleanupSystems(contexts));
