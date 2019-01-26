@@ -24,13 +24,13 @@ public class Action
     {
         get
         {
-            var properties = typeof(Action).GetType().GetProperties();
+            var fields = typeof(Action).GetFields();
             List<Action> actions = new List<Action>();
-            foreach (PropertyInfo p in properties)
+            foreach (FieldInfo f in fields)
             {
-                if (p.GetType() == typeof(Action))
+                if (f.FieldType == typeof(Action))
                 {
-                    actions.Add(p.GetValue(null) as Action);
+                    actions.Add(f.GetValue(null) as Action);
                 }
             }
             return actions;
