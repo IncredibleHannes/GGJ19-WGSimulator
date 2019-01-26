@@ -10,6 +10,7 @@ public sealed class CoreSystems : Feature
 
         Add(new EnterRoomSystem(contexts));
         Add(new StartActionSystem(contexts));
+        Add(new StopActionSystem(contexts));
 
         Add(new UpdateEnterRoomDirtynessOpinionSystem(contexts));
         Add(new UpdateEnterRoomCleanlinessOpinionSystem(contexts));
