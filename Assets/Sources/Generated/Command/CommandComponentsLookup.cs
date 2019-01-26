@@ -14,8 +14,9 @@ public static class CommandComponentsLookup {
     public const int Destroyed = 3;
     public const int EnterRoomCommand = 4;
     public const int StartActionCommand = 5;
+    public const int StopActionCommand = 6;
 
-    public const int TotalComponents = 6;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
         "CommandDestroyedListener",
@@ -23,7 +24,8 @@ public static class CommandComponentsLookup {
         "CreateRoomCommand",
         "Destroyed",
         "EnterRoomCommand",
-        "StartActionCommand"
+        "StartActionCommand",
+        "StopActionCommand"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -32,6 +34,7 @@ public static class CommandComponentsLookup {
         typeof(CreateRoomCommandComponent),
         typeof(DestroyedComponent),
         typeof(EnterRoomCommandComponent),
-        typeof(StartActionCommandComponent)
+        typeof(StartActionCommandComponent),
+        typeof(StopActionCommandComponent)
     };
 }
