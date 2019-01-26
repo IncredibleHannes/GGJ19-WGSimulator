@@ -10,6 +10,7 @@ public sealed class CoreSystems : Feature
 
         Add(new EnterRoomSystem(contexts));
         Add(new StartActionSystem(contexts));
+        Add(new StopActionSystem(contexts));
 
         Add(new UpdateEnterRoomDirtynessOpinionSystem(contexts));
         Add(new UpdateEnterRoomCleanlinessOpinionSystem(contexts));
@@ -20,5 +21,7 @@ public sealed class CoreSystems : Feature
         Add(new UpdateSameRoomOpinionSystem(contexts));
         Add(new UpdateOtherRoomOpinionSystem(contexts));
         Add(new UpdateDurationTimeSystem(contexts));
+
+        Add(new DurationTimeoutSystem(contexts));
     }
 }
