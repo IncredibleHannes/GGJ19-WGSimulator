@@ -10,6 +10,9 @@
 [Bb]uilds/
 [Ll]ogs/
 Assets/AssetStoreTools*
+Assets/TextMesh Pro.meta
+Assets/TextMesh Pro/
+
 
 # Visual Studio cache directory
 .vs/
