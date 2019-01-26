@@ -11,12 +11,12 @@ public sealed class CoreSystems : Feature
         Add(new EnterRoomSystem(contexts));
         Add(new StartActionSystem(contexts));
         Add(new StopActionSystem(contexts));
+        Add(new StopActionWhenNoMotivationSystem(contexts));
 
         Add(new UpdateEnterRoomDirtynessOpinionSystem(contexts));
         Add(new UpdateEnterRoomCleanlinessOpinionSystem(contexts));
 
         Add(new UpdateMotivationSystem(contexts));
-        Add(new CheckZeroMotivationSystem(contexts));
         Add(new UpdateFunSystem(contexts));
         Add(new UpdateRoomDirtLevelSystem(contexts));
         Add(new UpdateSameRoomOpinionSystem(contexts));
@@ -24,5 +24,6 @@ public sealed class CoreSystems : Feature
         Add(new UpdateDurationTimeSystem(contexts));
 
         Add(new DurationTimeoutSystem(contexts));
+        Add(new CheckZeroMotivationSystem(contexts));
     }
 }
