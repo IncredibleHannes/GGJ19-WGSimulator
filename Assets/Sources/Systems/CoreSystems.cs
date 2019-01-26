@@ -3,6 +3,7 @@ public sealed class CoreSystems : Feature
     public CoreSystems(Contexts contexts)
     {
         Add(new UpdateTimeSinceLastTickSystem(contexts));
+        Add(new UpdateTimeOfDaySystem(contexts));
 
         Add(new CreateRoomSystem(contexts));
         Add(new CreateFlatmateSystem(contexts));

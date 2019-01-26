@@ -11,19 +11,21 @@ public partial class CommandEntity {
     public StartActionCommandComponent startActionCommand { get { return (StartActionCommandComponent)GetComponent(CommandComponentsLookup.StartActionCommand); } }
     public bool hasStartActionCommand { get { return HasComponent(CommandComponentsLookup.StartActionCommand); } }
 
-    public void AddStartActionCommand(Action newAction, int newFlatmateId) {
+    public void AddStartActionCommand(Action newAction, int newFlatmateId, float newDuration) {
         var index = CommandComponentsLookup.StartActionCommand;
         var component = (StartActionCommandComponent)CreateComponent(index, typeof(StartActionCommandComponent));
         component.action = newAction;
         component.flatmateId = newFlatmateId;
+        component.duration = newDuration;
         AddComponent(index, component);
     }
 
-    public void ReplaceStartActionCommand(Action newAction, int newFlatmateId) {
+    public void ReplaceStartActionCommand(Action newAction, int newFlatmateId, float newDuration) {
         var index = CommandComponentsLookup.StartActionCommand;
         var component = (StartActionCommandComponent)CreateComponent(index, typeof(StartActionCommandComponent));
         component.action = newAction;
         component.flatmateId = newFlatmateId;
+        component.duration = newDuration;
         ReplaceComponent(index, component);
     }
 
