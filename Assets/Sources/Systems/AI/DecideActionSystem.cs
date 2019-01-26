@@ -31,7 +31,7 @@ public class DecideActionSystem : IExecuteSystem
                 totalDirtyness += room.dirtLevel.value;
                 roomDirtyness.Add(room.roomId.value, room.dirtLevel.value);
             }
-            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, 0, 0, 0, 1, flatmate.currentRoom.roomId);
+            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, new AIBehaviour(0.3f, 0.5f, 2, 2), flatmate.currentRoom.roomId);
             AIAction nextAction = decideNextAction(s);
             if (nextAction == null)
             {
@@ -90,7 +90,7 @@ public class DecideActionSystem : IExecuteSystem
         {
             opinion += entry.Value;
         }
-        return s.motivation * s.motivationMultiplyer + s.fun * s.funMultiplyer + s.opinionMultiplyer * opinion - s.totalDirtyness * s.dirtynessMultiplayer;
+        return s.motivation * s.aiBehaviour.motivationMultiplier + s.fun * s.aiBehaviour.funMultiplier + s.aiBehaviour.opinionMultiplier * opinion - s.totalDirtyness * s.aiBehaviour.dirtynessMultiplier;
     }
 
     private float findBestAction(State s, int searchDepth)
@@ -132,13 +132,13 @@ public class DecideActionSystem : IExecuteSystem
         }
         if (s.roomDirtyness[s.currentRoom] + madeDirt <= 0)
         {
-            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, s.totalDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer, a.room);
+            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, s.totalDirtyness, s.aiBehaviour, a.room);
         }
         else
         {
             float newDirtyness = madeDirt + s.totalDirtyness;
             s.roomDirtyness[s.currentRoom] += madeDirt;
-            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, newDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer, a.room);
+            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, newDirtyness, s.aiBehaviour, a.room);
         }
 
     }

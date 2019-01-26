@@ -10,24 +10,17 @@ public struct State
 
     public Dictionary<int, float> roomDirtyness;
 
-    public float motivationMultiplyer;
-    public float funMultiplyer;
-    public float opinionMultiplyer;
-
-    public float dirtynessMultiplayer;
+    public AIBehaviour aiBehaviour;
 
     public int currentRoom;
 
-    public State(float motivation, float fun, Dictionary<int, float> opinion, Dictionary<int, float> roomDirtyness, float totalDirtyness, float v3, float v4, float v5, float dirtynessMultiplayer, int currentRoom)
+    public State(float motivation, float fun, Dictionary<int, float> opinion, Dictionary<int, float> roomDirtyness, float totalDirtyness, AIBehaviour aiBehaviour, int currentRoom)
     {
         this.motivation = motivation;
         this.fun = fun;
         this.opinion = opinion;
         this.totalDirtyness = totalDirtyness;
-        this.motivationMultiplyer = v3;
-        this.funMultiplyer = v4;
-        this.opinionMultiplyer = v5;
-        this.dirtynessMultiplayer = dirtynessMultiplayer;
+        this.aiBehaviour = aiBehaviour;
         this.currentRoom = currentRoom;
         this.roomDirtyness = roomDirtyness;
     }
