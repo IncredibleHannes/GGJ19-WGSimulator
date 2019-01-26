@@ -1,15 +1,42 @@
+using System.Collections.Generic;
+using System.Reflection;
+
 public class Action
 {
-    public float MotivationPerTick { get; private set; }
-    public float FunPerTick { get; private set; }
-    public float DirtPerTick { get; private set; }
+    public string Title { get; private set; }
+    public float MotivationPerSecond { get; private set; }
+    public float FunPerSecond { get; private set; }
+    public float DirtPerSecond { get; private set; }
+    public float BaseOpinionPerSecond { get; private set; }
 
-    public Action(float motivationPerTick, float funPerTick, float dirtPerTick)
+    public Action(string title, float motivationPerSecond, float funPerSecond, float dirtPerSecond, float baseOpinionPerSecond)
     {
-        MotivationPerTick = motivationPerTick;
-        FunPerTick = funPerTick;
-        DirtPerTick = dirtPerTick;
+        Title = title;
+        MotivationPerSecond = motivationPerSecond;
+        FunPerSecond = funPerSecond;
+        DirtPerSecond = dirtPerSecond;
+        BaseOpinionPerSecond = baseOpinionPerSecond;
     }
 
-    public Action() : this(1, 1, 1) { }
+    public Action() : this("idle", 0, 0, 0, 0) { }
+
+    public static List<Action> Actions
+    {
+        get
+        {
+            var properties = typeof(Action).GetType().GetProperties();
+            List<Action> actions = new List<Action>();
+            foreach (PropertyInfo p in properties)
+            {
+                if (p.GetType() == typeof(Action))
+                {
+                    actions.Add(p.GetValue(null) as Action);
+                }
+            }
+            return actions;
+        }
+    }
+
+    public static Action TIDY_UP = new Action("tidy up", -1, 0, -1, 1);
+    public static Action WATCH_TV = new Action("watch TV", 0, 2, 0.5f, -.25f);
 }

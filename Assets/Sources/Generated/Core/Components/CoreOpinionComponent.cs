@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class CoreEntity {
 
-    public FlatmateIdComponent flatmateId { get { return (FlatmateIdComponent)GetComponent(CoreComponentsLookup.FlatmateId); } }
-    public bool hasFlatmateId { get { return HasComponent(CoreComponentsLookup.FlatmateId); } }
+    public OpinionComponent opinion { get { return (OpinionComponent)GetComponent(CoreComponentsLookup.Opinion); } }
+    public bool hasOpinion { get { return HasComponent(CoreComponentsLookup.Opinion); } }
 
-    public void AddFlatmateId(int newValue) {
-        var index = CoreComponentsLookup.FlatmateId;
-        var component = (FlatmateIdComponent)CreateComponent(index, typeof(FlatmateIdComponent));
+    public void AddOpinion(System.Collections.Generic.Dictionary<int, float> newValue) {
+        var index = CoreComponentsLookup.Opinion;
+        var component = (OpinionComponent)CreateComponent(index, typeof(OpinionComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceFlatmateId(int newValue) {
-        var index = CoreComponentsLookup.FlatmateId;
-        var component = (FlatmateIdComponent)CreateComponent(index, typeof(FlatmateIdComponent));
+    public void ReplaceOpinion(System.Collections.Generic.Dictionary<int, float> newValue) {
+        var index = CoreComponentsLookup.Opinion;
+        var component = (OpinionComponent)CreateComponent(index, typeof(OpinionComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveFlatmateId() {
-        RemoveComponent(CoreComponentsLookup.FlatmateId);
+    public void RemoveOpinion() {
+        RemoveComponent(CoreComponentsLookup.Opinion);
     }
 }
 
@@ -40,17 +40,17 @@ public partial class CoreEntity {
 //------------------------------------------------------------------------------
 public sealed partial class CoreMatcher {
 
-    static Entitas.IMatcher<CoreEntity> _matcherFlatmateId;
+    static Entitas.IMatcher<CoreEntity> _matcherOpinion;
 
-    public static Entitas.IMatcher<CoreEntity> FlatmateId {
+    public static Entitas.IMatcher<CoreEntity> Opinion {
         get {
-            if (_matcherFlatmateId == null) {
-                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.FlatmateId);
+            if (_matcherOpinion == null) {
+                var matcher = (Entitas.Matcher<CoreEntity>)Entitas.Matcher<CoreEntity>.AllOf(CoreComponentsLookup.Opinion);
                 matcher.componentNames = CoreComponentsLookup.componentNames;
-                _matcherFlatmateId = matcher;
+                _matcherOpinion = matcher;
             }
 
-            return _matcherFlatmateId;
+            return _matcherOpinion;
         }
     }
 }

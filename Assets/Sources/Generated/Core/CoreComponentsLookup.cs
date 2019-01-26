@@ -18,13 +18,14 @@ public static class CoreComponentsLookup {
     public const int Fun = 7;
     public const int Motivation = 8;
     public const int Name = 9;
-    public const int Player = 10;
-    public const int Position = 11;
-    public const int Room = 12;
-    public const int RoomId = 13;
-    public const int RoomType = 14;
+    public const int Opinion = 10;
+    public const int Player = 11;
+    public const int Position = 12;
+    public const int Room = 13;
+    public const int RoomId = 14;
+    public const int RoomType = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "ActiveAction",
@@ -37,6 +38,7 @@ public static class CoreComponentsLookup {
         "Fun",
         "Motivation",
         "Name",
+        "Opinion",
         "Player",
         "Position",
         "Room",
@@ -55,6 +57,7 @@ public static class CoreComponentsLookup {
         typeof(FunComponent),
         typeof(MotivationComponent),
         typeof(NameComponent),
+        typeof(OpinionComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(RoomComponent),

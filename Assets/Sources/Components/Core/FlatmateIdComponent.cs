@@ -5,5 +5,5 @@ using Entitas.CodeGeneration.Attributes;
 public sealed class FlatmateIdComponent : IComponent
 {
     [PrimaryEntityIndex]
-    public int flatmateId;
+    public int value;
 }

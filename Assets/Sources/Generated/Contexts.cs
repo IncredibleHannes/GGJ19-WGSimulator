@@ -76,7 +76,7 @@ public partial class Contexts {
         core.AddEntityIndex(new Entitas.PrimaryEntityIndex<CoreEntity, int>(
             FlatmateId,
             core.GetGroup(CoreMatcher.FlatmateId),
-            (e, c) => ((FlatmateIdComponent)c).flatmateId));
+            (e, c) => ((FlatmateIdComponent)c).value));
 
         core.AddEntityIndex(new Entitas.PrimaryEntityIndex<CoreEntity, int>(
             RoomId,
@@ -91,8 +91,8 @@ public static class ContextsExtensions {
         return ((Entitas.EntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.CurrentRoom)).GetEntities(roomId);
     }
 
-    public static CoreEntity GetEntityWithFlatmateId(this CoreContext context, int flatmateId) {
-        return ((Entitas.PrimaryEntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.FlatmateId)).GetEntity(flatmateId);
+    public static CoreEntity GetEntityWithFlatmateId(this CoreContext context, int value) {
+        return ((Entitas.PrimaryEntityIndex<CoreEntity, int>)context.GetEntityIndex(Contexts.FlatmateId)).GetEntity(value);
     }
 
     public static CoreEntity GetEntityWithRoomId(this CoreContext context, int value) {
