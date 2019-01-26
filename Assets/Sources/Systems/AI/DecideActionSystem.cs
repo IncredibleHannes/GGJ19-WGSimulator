@@ -35,7 +35,7 @@ public class DecideActionSystem : IExecuteSystem
             {
                 command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
             }
-            command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value);
+            command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, 5.0f);
 
         }
     }

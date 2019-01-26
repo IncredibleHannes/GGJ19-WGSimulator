@@ -28,6 +28,7 @@ public sealed class StartActionSystem : ReactiveSystem<CommandEntity>
 
             var flatmate = coreContext.GetEntityWithFlatmateId(command.flatmateId);
             flatmate.ReplaceActiveAction(command.action);
+            flatmate.AddActionDuration(command.duration);
 
             e.isDestroyed = true;
         }

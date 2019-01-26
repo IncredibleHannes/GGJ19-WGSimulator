@@ -19,5 +19,6 @@ public sealed class CoreSystems : Feature
         Add(new UpdateRoomDirtLevelSystem(contexts));
         Add(new UpdateSameRoomOpinionSystem(contexts));
         Add(new UpdateOtherRoomOpinionSystem(contexts));
+        Add(new UpdateDurationTimeSystem(contexts));
     }
 }
