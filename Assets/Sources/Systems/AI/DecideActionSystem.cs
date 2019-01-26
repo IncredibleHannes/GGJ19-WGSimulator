@@ -33,6 +33,10 @@ public class DecideActionSystem : IExecuteSystem
             }
             State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, 0, 0, 0, 1, flatmate.currentRoom.roomId);
             AIAction nextAction = decideNextAction(s);
+            if (nextAction == null)
+            {
+                return;
+            }
             if (nextAction.room != flatmate.currentRoom.roomId)
             {
                 command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
@@ -122,6 +126,10 @@ public class DecideActionSystem : IExecuteSystem
         float newFun = a.action.FunPerSecond * DEFAULT_ACTION_LENGTH + s.fun;
         float madeDirt = a.action.DirtPerSecond * DEFAULT_ACTION_LENGTH;
         Dictionary<int, float> newOpinion = s.opinion;
+        if (!s.roomDirtyness.ContainsKey(s.currentRoom))
+        {
+            return s;
+        }
         if (s.roomDirtyness[s.currentRoom] + madeDirt <= 0)
         {
             return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, s.totalDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer, a.room);
