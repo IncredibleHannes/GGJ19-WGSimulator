@@ -25,11 +25,13 @@ public class DecideActionSystem : IExecuteSystem
         foreach (var flatmate in flatmates)
         {
             float totalDirtyness = 0;
+            Dictionary<int, float> roomDirtyness = new Dictionary<int, float>();
             foreach (var room in rooms)
             {
                 totalDirtyness += room.dirtLevel.value;
+                roomDirtyness.Add(room.roomId.value, room.dirtLevel.value);
             }
-            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, totalDirtyness, 0, 0, 0, 1);
+            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, 0, 0, 0, 1, flatmate.currentRoom.roomId);
             AIAction nextAction = decideNextAction(s);
             if (nextAction.room != flatmate.currentRoom.roomId)
             {
@@ -118,8 +120,18 @@ public class DecideActionSystem : IExecuteSystem
     {
         float newMotivation = a.action.MotivationPerSecond * DEFAULT_ACTION_LENGTH + s.motivation;
         float newFun = a.action.FunPerSecond * DEFAULT_ACTION_LENGTH + s.fun;
-        float newDirtyness = a.action.DirtPerSecond * DEFAULT_ACTION_LENGTH + s.totalDirtyness;
+        float madeDirt = a.action.DirtPerSecond * DEFAULT_ACTION_LENGTH;
         Dictionary<int, float> newOpinion = s.opinion;
-        return new State(newMotivation, newFun, newOpinion, newDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer);
+        if (s.roomDirtyness[s.currentRoom] + madeDirt <= 0)
+        {
+            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, s.totalDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer, a.room);
+        }
+        else
+        {
+            float newDirtyness = madeDirt + s.totalDirtyness;
+            s.roomDirtyness[s.currentRoom] += madeDirt;
+            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, newDirtyness, s.motivationMultiplyer, s.funMultiplyer, s.opinionMultiplyer, s.dirtynessMultiplayer, a.room);
+        }
+
     }
 }
