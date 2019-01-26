@@ -41,7 +41,7 @@ public sealed class UpdateEnterRoomDirtynessOpinionSystem : ReactiveSystem<CoreE
             List<int> lastCleanup = room.lastCleanup.value;
 
             int victim;
-            if (lastCleanup.Capacity == flatmates.count)
+            if (lastCleanup.Count == flatmates.count)
             {
                 victim = lastCleanup[lastCleanup.Count - 1];
             }
