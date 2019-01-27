@@ -76,7 +76,8 @@ public class DecideActionSystem : IExecuteSystem
             {
                 foreach (var room in rooms)
                 {
-                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type))
+                    bool roomIsDirty = !(action.DirtPerSecond < 0) || room.dirtLevel.value + (action.DirtPerSecond * DEFAULT_ACTION_LENGTH) > 0;
+                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type) && roomIsDirty)
                         result.Add(new AIAction(action, room.roomId.value));
                 }
             }
