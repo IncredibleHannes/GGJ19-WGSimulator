@@ -24,6 +24,7 @@ public sealed class CoreSystems : Feature
         Add(new UpdateDurationTimeSystem(contexts));
 
         Add(new DurationTimeoutSystem(contexts));
-        Add(new CheckZeroMotivationSystem(contexts));
+        Add(new StopActionWhenDirtyAwaySystem(contexts));
+        Add(new CheckZeroDirtynessSystem(contexts));
     }
 }
