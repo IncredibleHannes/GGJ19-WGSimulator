@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
+using System;
 
 public class DecideActionSystem : IExecuteSystem
 {
@@ -9,7 +10,7 @@ public class DecideActionSystem : IExecuteSystem
     readonly IGroup<CoreEntity> flatmates;
     readonly IGroup<CoreEntity> rooms;
 
-    private int SEARCH_DEPTH = 4;
+    private int SEARCH_DEPTH = 3;
     private int DEFAULT_ACTION_LENGTH = 5;
 
     public DecideActionSystem(Contexts contexts)
@@ -75,7 +76,8 @@ public class DecideActionSystem : IExecuteSystem
             {
                 foreach (var room in rooms)
                 {
-                    result.Add(new AIAction(action, room.roomId.value));
+                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type))
+                        result.Add(new AIAction(action, room.roomId.value));
                 }
             }
 
