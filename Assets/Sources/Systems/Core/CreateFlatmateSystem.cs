@@ -4,6 +4,7 @@ using Entitas;
 public sealed class CreateFlatmateSystem : ReactiveSystem<CommandEntity>
 {
     private readonly CoreContext coreContext;
+    System.Random rnd = new System.Random();
 
     public CreateFlatmateSystem(Contexts contexts) : base(contexts.command)
     {
@@ -35,7 +36,7 @@ public sealed class CreateFlatmateSystem : ReactiveSystem<CommandEntity>
             flatmate.AddCurrentRoom(command.startingRoomId);
             flatmate.AddOpinion(new Dictionary<int, float>());
             flatmate.AddOpinionModifier(1, 1, 1, 1, 1, 1, 1);
-            flatmate.AddAIBehaviour(new AIBehaviour(0.2f, 0.5f, 0.6f, 1));
+            flatmate.AddAIBehaviour(new AIBehaviour(0.2f * (float)rnd.NextDouble(), (float)rnd.NextDouble(), (float)rnd.NextDouble(), 2 * (float)rnd.NextDouble()));
 
             e.isDestroyed = true;
         }

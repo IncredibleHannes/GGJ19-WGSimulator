@@ -26,6 +26,8 @@ public sealed class LinkRoomsSystem : ReactiveSystem<ViewEntity>
         {
             var flat = e.view.value as FlatView;
 
+            if (flat == null) continue;
+
             flat.livingRoom.Link(coreContext.GetEntityWithRoomId(flat.livingRoom.roomId));
             flat.bathroom.Link(coreContext.GetEntityWithRoomId(flat.bathroom.roomId));
             flat.kitchen.Link(coreContext.GetEntityWithRoomId(flat.kitchen.roomId));

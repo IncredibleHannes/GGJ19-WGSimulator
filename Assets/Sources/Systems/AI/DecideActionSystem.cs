@@ -8,16 +8,20 @@ public class DecideActionSystem : IExecuteSystem
     readonly CoreContext context;
     readonly CommandContext command;
     readonly IGroup<CoreEntity> flatmates;
+    readonly IGroup<CoreEntity> busyFlatmates;
     readonly IGroup<CoreEntity> rooms;
 
     private int SEARCH_DEPTH = 3;
     private int DEFAULT_ACTION_LENGTH = 5;
+
+    System.Random rnd = new System.Random();
 
     public DecideActionSystem(Contexts contexts)
     {
         context = contexts.core;
         command = contexts.command;
         rooms = context.GetGroup(CoreMatcher.RoomId);
+        busyFlatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.Flatmate, CoreMatcher.ActiveAction, CoreMatcher.CurrentRoom));
         flatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.AIBehaviour, CoreMatcher.Flatmate, CoreMatcher.Motivation, CoreMatcher.Fun, CoreMatcher.CurrentRoom, CoreMatcher.Opinion).NoneOf(CoreMatcher.Player, CoreMatcher.ActiveAction));
     }
 
@@ -42,7 +46,7 @@ public class DecideActionSystem : IExecuteSystem
             {
                 command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
             }
-            command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, 5.0f);
+            command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, nextAction.action.DefaultLength - 1 + 2 * (float)rnd.NextDouble());
 
         }
     }
@@ -56,7 +60,6 @@ public class DecideActionSystem : IExecuteSystem
         foreach (var action in possibleAcions)
         {
             float score = findBestAction(applyAction(action, s), SEARCH_DEPTH);
-            Debug.Log(action.action.Title + score);
             if (maxScore < score)
             {
                 maxScore = score;
@@ -72,12 +75,17 @@ public class DecideActionSystem : IExecuteSystem
         var result = new List<AIAction>();
         foreach (var action in Action.Actions)
         {
-            if (-(action.MotivationPerSecond * DEFAULT_ACTION_LENGTH) <= s.motivation)
+            if (-(action.MotivationPerSecond * action.DefaultLength) <= s.motivation)
             {
                 foreach (var room in rooms)
                 {
-                    bool roomIsDirty = !(action.DirtPerSecond < 0) || room.dirtLevel.value + (action.DirtPerSecond * DEFAULT_ACTION_LENGTH) > 0;
-                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type) && roomIsDirty)
+                    bool roomIsDirty = !(action.DirtPerSecond < 0) || room.dirtLevel.value + (action.DirtPerSecond * action.DefaultLength) > 0;
+                    bool actionAlreadyDone = false;
+                    foreach (var flatmate in busyFlatmates)
+                    {
+                        actionAlreadyDone = actionAlreadyDone || (flatmate.activeAction.value.Title == action.Title && flatmate.currentRoom.roomId == room.roomId.value);
+                    }
+                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type) && roomIsDirty && !actionAlreadyDone)
                         result.Add(new AIAction(action, room.roomId.value));
                 }
             }
@@ -126,9 +134,9 @@ public class DecideActionSystem : IExecuteSystem
 
     private State applyAction(AIAction a, State s)
     {
-        float newMotivation = a.action.MotivationPerSecond * DEFAULT_ACTION_LENGTH + s.motivation;
-        float newFun = a.action.FunPerSecond * DEFAULT_ACTION_LENGTH + s.fun;
-        float madeDirt = a.action.DirtPerSecond * DEFAULT_ACTION_LENGTH;
+        float newMotivation = a.action.MotivationPerSecond * a.action.DefaultLength + s.motivation;
+        float newFun = a.action.FunPerSecond * a.action.DefaultLength + s.fun;
+        float madeDirt = a.action.DirtPerSecond * a.action.DefaultLength;
         Dictionary<int, float> newOpinion = s.opinion;
         if (!s.roomDirtyness.ContainsKey(s.currentRoom))
         {

@@ -34,7 +34,7 @@ public sealed class StopActionWhenDirtyAwaySystem : ReactiveSystem<CoreEntity>
 
                 foreach (var flatmateWithTidyUpJob in flatmatesInRoom)
                 {
-                    if (flatmateWithTidyUpJob.activeAction.value.DirtPerSecond < 0)
+                    if (flatmateWithTidyUpJob.hasActiveAction && flatmateWithTidyUpJob.activeAction.value.DirtPerSecond < 0)
                     {
                         commandContext.CreateEntity().AddStopActionCommand(flatmateWithTidyUpJob.flatmateId.value);
                     }
