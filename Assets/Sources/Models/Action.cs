@@ -4,21 +4,23 @@ using System.Reflection;
 public class Action
 {
     public string Title { get; private set; }
+    public RoomType[] AllowedRoomTypes { get; private set; }
     public float MotivationPerSecond { get; private set; }
     public float FunPerSecond { get; private set; }
     public float DirtPerSecond { get; private set; }
     public float BaseOpinionPerSecond { get; private set; }
 
-    public Action(string title, float motivationPerSecond, float funPerSecond, float dirtPerSecond, float baseOpinionPerSecond)
+    private Action(string title, RoomType[] allowedRoomTypes, float motivationPerSecond, float funPerSecond, float dirtPerSecond, float baseOpinionPerSecond)
     {
         Title = title;
+        AllowedRoomTypes = allowedRoomTypes;
         MotivationPerSecond = motivationPerSecond;
         FunPerSecond = funPerSecond;
         DirtPerSecond = dirtPerSecond;
         BaseOpinionPerSecond = baseOpinionPerSecond;
     }
 
-    public Action() : this("idle", 0, 0, 0, 0) { }
+    public Action() : this("idle", new RoomType[] { RoomType.BATHROOM, RoomType.KITCHEN, RoomType.LIVING_ROOM }, 0, 0, 0, 0) { }
 
     public static List<Action> Actions
     {
@@ -37,6 +39,11 @@ public class Action
         }
     }
 
-    public static Action TIDY_UP = new Action("tidy up", -1, 0, -1, 1);
-    public static Action WATCH_TV = new Action("watch TV", 0, 2, 0.5f, -.25f);
+    public static Action TIDY_UP = new Action("tidy up", new RoomType[] { RoomType.LIVING_ROOM, RoomType.KITCHEN }, -1, 0, -1, 1);
+    public static Action CLEAN = new Action("clean", new RoomType[] { RoomType.BATHROOM }, -1, 0, -1, 1);
+    public static Action DO_THE_DISHES = new Action("do the dishes", new RoomType[] { RoomType.KITCHEN }, -1, 0, -1, 1);
+    public static Action WATCH_TV = new Action("watch TV", new RoomType[] { RoomType.LIVING_ROOM }, 0, 2, 0.5f, -.25f);
+    public static Action HAVE_A_PARTY = new Action("have a party", new RoomType[] { RoomType.LIVING_ROOM }, 0, 2, 0.5f, -.25f);
+    public static Action EAT = new Action("eat", new RoomType[] { RoomType.KITCHEN }, 0, 2, 0.5f, -.25f);
+    public static Action SHOWER = new Action("shower", new RoomType[] { RoomType.BATHROOM }, 0, 2, 0.5f, -.25f);
 }
