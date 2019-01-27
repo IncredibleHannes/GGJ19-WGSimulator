@@ -167,6 +167,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953805970954963307}
+  - component: {fileID: 2193846520406667510}
   m_Layer: 0
   m_Name: Kitchen
   m_TagString: Untagged
@@ -196,6 +197,22 @@ Transform:
   m_Father: {fileID: 6953805972803321791}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2193846520406667510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953805970954963306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c231a72ee509b9d99b5342e0dec306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomId: 1
+  dirtSprites:
+  - {fileID: 6953805971482070956}
+  - {fileID: 6953805971989569850}
 --- !u!1 &6953805970979991214
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +280,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 01bc2b9de6183aa879821970b0181037, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1324,6 +1341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953805971644617274}
+  - component: {fileID: 8939405268048841653}
   m_Layer: 0
   m_Name: Living Room
   m_TagString: Untagged
@@ -1348,6 +1366,21 @@ Transform:
   m_Father: {fileID: 6953805972803321791}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8939405268048841653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953805971644617285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c231a72ee509b9d99b5342e0dec306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomId: 0
+  dirtSprites:
+  - {fileID: 6953805972468791443}
 --- !u!1 &6953805971676254113
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,7 +2001,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 92a276ad714fa7e4dab1a48f3317dc72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2753,8 +2786,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6953805972329923573}
+  - component: {fileID: 2967227278727771679}
   m_Layer: 0
-  m_Name: Bath
+  m_Name: Bathroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2778,6 +2812,24 @@ Transform:
   m_Father: {fileID: 6953805972803321791}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2967227278727771679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6953805972329923572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c231a72ee509b9d99b5342e0dec306, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomId: 2
+  dirtSprites:
+  - {fileID: 6953805971947918209}
+  - {fileID: 6953805971785252931}
+  - {fileID: 6953805972826232503}
+  - {fileID: 6953805972443750034}
 --- !u!1 &6953805972357847839
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,6 +4130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 441cd2702b281c6ef930901b1e05d350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  livingRoom: {fileID: 8939405268048841653}
+  bathroom: {fileID: 2967227278727771679}
+  kitchen: {fileID: 2193846520406667510}
 --- !u!1 &6953805972826232497
 GameObject:
   m_ObjectHideFlags: 0

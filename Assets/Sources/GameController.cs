@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Contexts contexts = Contexts.sharedInstance;
+        contexts.core.IdAutogenerationEnabled = true;
+
         systems = new AllSystems(Contexts.sharedInstance);
         systems.Initialize();
 
@@ -24,9 +27,11 @@ public class GameController : MonoBehaviour
         var contexts = Contexts.sharedInstance;
         var commandContext = contexts.command;
 
-        commandContext.CreateEntity().AddCreateRoomCommand(new Room("Living Room"));
-        commandContext.CreateEntity().AddCreateRoomCommand(new Room("Dining Room"));
+        commandContext.CreateEntity().AddCreateFlatCommand(2, 0);
+
         commandContext.CreateEntity().AddCreateFlatmateCommand("Mate", 0);
-        commandContext.CreateEntity().AddCreateFlatmateCommand("Dude", 0);
+        commandContext.CreateEntity().AddCreateFlatmateCommand("Dude", 1);
+        commandContext.CreateEntity().AddCreateFlatmateCommand("Dudley", 2);
+        commandContext.CreateEntity().AddCreateFlatmateCommand("Madlene", 3);
     }
 }

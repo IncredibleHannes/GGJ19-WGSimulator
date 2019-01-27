@@ -10,5 +10,10 @@ public sealed class CoreEventSystems : Feature {
 
     public CoreEventSystems(Contexts contexts) {
         Add(new CoreDestroyedEventSystem(contexts)); // priority: 0
+        Add(new DirtLevelEventSystem(contexts)); // priority: 0
+        Add(new FunEventSystem(contexts)); // priority: 0
+        Add(new MotivationEventSystem(contexts)); // priority: 0
+        Add(new OpinionEventSystem(contexts)); // priority: 0
+        Add(new TimeOfDayEventSystem(contexts)); // priority: 0
     }
 }

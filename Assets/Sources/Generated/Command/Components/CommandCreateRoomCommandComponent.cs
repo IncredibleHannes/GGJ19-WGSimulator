@@ -11,16 +11,18 @@ public partial class CommandEntity {
     public CreateRoomCommandComponent createRoomCommand { get { return (CreateRoomCommandComponent)GetComponent(CommandComponentsLookup.CreateRoomCommand); } }
     public bool hasCreateRoomCommand { get { return HasComponent(CommandComponentsLookup.CreateRoomCommand); } }
 
-    public void AddCreateRoomCommand(Room newRoomType) {
+    public void AddCreateRoomCommand(int newRoomId, Room newRoomType) {
         var index = CommandComponentsLookup.CreateRoomCommand;
         var component = (CreateRoomCommandComponent)CreateComponent(index, typeof(CreateRoomCommandComponent));
+        component.roomId = newRoomId;
         component.roomType = newRoomType;
         AddComponent(index, component);
     }
 
-    public void ReplaceCreateRoomCommand(Room newRoomType) {
+    public void ReplaceCreateRoomCommand(int newRoomId, Room newRoomType) {
         var index = CommandComponentsLookup.CreateRoomCommand;
         var component = (CreateRoomCommandComponent)CreateComponent(index, typeof(CreateRoomCommandComponent));
+        component.roomId = newRoomId;
         component.roomType = newRoomType;
         ReplaceComponent(index, component);
     }
