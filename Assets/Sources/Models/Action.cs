@@ -41,9 +41,9 @@ public class Action
 
     public static Action TIDY_UP = new Action("tidy up", new RoomType[] { RoomType.LIVING_ROOM, RoomType.KITCHEN }, -1, 0, -1, 1);
     public static Action CLEAN = new Action("clean", new RoomType[] { RoomType.BATHROOM }, -1, 0, -1, 1);
-    public static Action DO_THE_DISHES = new Action("do the dishes", new RoomType[] { RoomType.KITCHEN }, -1, 0, -1, 1);
+    public static Action DO_THE_DISHES = new Action("do the dishes", new RoomType[] { RoomType.KITCHEN }, -0.5f, 0.01f, -0.25f, 0.75f);
     public static Action WATCH_TV = new Action("watch TV", new RoomType[] { RoomType.LIVING_ROOM }, 0, 2, 0.5f, -.25f);
-    public static Action HAVE_A_PARTY = new Action("have a party", new RoomType[] { RoomType.LIVING_ROOM }, 0, 2, 0.5f, -.25f);
-    public static Action EAT = new Action("eat", new RoomType[] { RoomType.KITCHEN }, 0, 2, 0.5f, -.25f);
-    public static Action SHOWER = new Action("shower", new RoomType[] { RoomType.BATHROOM }, 0, 2, 0.5f, -.25f);
+    public static Action HAVE_A_PARTY = new Action("have a party", new RoomType[] { RoomType.LIVING_ROOM }, 0, 1, 1, -1);
+    public static Action EAT = new Action("eat", new RoomType[] { RoomType.KITCHEN }, 0, 0.6f, 0.4f, -.1f);
+    public static Action SHOWER = new Action("shower", new RoomType[] { RoomType.BATHROOM }, 0, 0.7f, 0.4f, -.1f);
 }
