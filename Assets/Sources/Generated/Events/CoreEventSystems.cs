@@ -9,6 +9,7 @@
 public sealed class CoreEventSystems : Feature {
 
     public CoreEventSystems(Contexts contexts) {
+        Add(new CurrentRoomEventSystem(contexts)); // priority: 0
         Add(new CoreDestroyedEventSystem(contexts)); // priority: 0
         Add(new DirtLevelEventSystem(contexts)); // priority: 0
         Add(new FunEventSystem(contexts)); // priority: 0

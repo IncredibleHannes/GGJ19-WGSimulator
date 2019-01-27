@@ -13,32 +13,33 @@ public static class CoreComponentsLookup {
     public const int AIBehaviour = 2;
     public const int CoreDestroyedListener = 3;
     public const int CurrentRoom = 4;
-    public const int Destroyed = 5;
-    public const int DirtLevel = 6;
-    public const int DirtLevelListener = 7;
-    public const int Flat = 8;
-    public const int Flatmate = 9;
-    public const int FlatmateId = 10;
-    public const int Fun = 11;
-    public const int FunListener = 12;
-    public const int Id = 13;
-    public const int LastCleanup = 14;
-    public const int Motivation = 15;
-    public const int MotivationListener = 16;
-    public const int Name = 17;
-    public const int Opinion = 18;
-    public const int OpinionListener = 19;
-    public const int OpinionModifier = 20;
-    public const int Player = 21;
-    public const int Position = 22;
-    public const int Room = 23;
-    public const int RoomId = 24;
-    public const int RoomType = 25;
-    public const int TimeOfDay = 26;
-    public const int TimeOfDayListener = 27;
-    public const int TimeSinceLastTick = 28;
+    public const int CurrentRoomListener = 5;
+    public const int Destroyed = 6;
+    public const int DirtLevel = 7;
+    public const int DirtLevelListener = 8;
+    public const int Flat = 9;
+    public const int Flatmate = 10;
+    public const int FlatmateId = 11;
+    public const int Fun = 12;
+    public const int FunListener = 13;
+    public const int Id = 14;
+    public const int LastCleanup = 15;
+    public const int Motivation = 16;
+    public const int MotivationListener = 17;
+    public const int Name = 18;
+    public const int Opinion = 19;
+    public const int OpinionListener = 20;
+    public const int OpinionModifier = 21;
+    public const int Player = 22;
+    public const int Position = 23;
+    public const int Room = 24;
+    public const int RoomId = 25;
+    public const int RoomType = 26;
+    public const int TimeOfDay = 27;
+    public const int TimeOfDayListener = 28;
+    public const int TimeSinceLastTick = 29;
 
-    public const int TotalComponents = 29;
+    public const int TotalComponents = 30;
 
     public static readonly string[] componentNames = {
         "ActionDuration",
@@ -46,6 +47,7 @@ public static class CoreComponentsLookup {
         "AIBehaviour",
         "CoreDestroyedListener",
         "CurrentRoom",
+        "CurrentRoomListener",
         "Destroyed",
         "DirtLevel",
         "DirtLevelListener",
@@ -78,6 +80,7 @@ public static class CoreComponentsLookup {
         typeof(AIBehaviourComponent),
         typeof(CoreDestroyedListenerComponent),
         typeof(CurrentRoomComponent),
+        typeof(CurrentRoomListenerComponent),
         typeof(DestroyedComponent),
         typeof(DirtLevelComponent),
         typeof(DirtLevelListenerComponent),
