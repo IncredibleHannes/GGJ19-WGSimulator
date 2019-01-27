@@ -3,6 +3,7 @@ public sealed class ViewSystems : Feature
     public ViewSystems(Contexts contexts)
     {
         Add(new FlatViewCreatorSystem(contexts));
+        Add(new FlatmateViewCreatorSystem(contexts));
 
         Add(new CreateViewSystem(contexts));
         Add(new LinkViewSystem(contexts));
