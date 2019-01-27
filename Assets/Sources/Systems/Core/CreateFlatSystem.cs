@@ -31,9 +31,9 @@ public sealed class CreateFlatSystem : ReactiveSystem<CommandEntity>
             var flat = coreContext.CreateEntity();
             flat.isFlat = true;
 
-            commandContext.CreateEntity().AddCreateRoomCommand(0, new Room("living room"));
-            commandContext.CreateEntity().AddCreateRoomCommand(1, new Room("kitchen"));
-            commandContext.CreateEntity().AddCreateRoomCommand(2, new Room("bathroom"));
+            commandContext.CreateEntity().AddCreateRoomCommand(0, Room.LIVING_ROOM);
+            commandContext.CreateEntity().AddCreateRoomCommand(1, Room.KITCHEN);
+            commandContext.CreateEntity().AddCreateRoomCommand(2, Room.BATHROOM);
         }
     }
 }
