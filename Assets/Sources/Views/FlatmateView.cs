@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlatmateView : View, ICurrentRoomListener
+public class FlatmateView : View, ICurrentRoomListener, IActiveActionListener
 {
     private static System.Random rng = new System.Random();
 
@@ -27,6 +27,14 @@ public class FlatmateView : View, ICurrentRoomListener
 
         entity.AddCurrentRoomListener(this);
         if (entity.hasCurrentRoom) this.OnCurrentRoom(entity, entity.currentRoom.roomId);
+    }
+
+    public void OnActiveAction(CoreEntity entity, Action value)
+    {
+        if (entity.hasActiveAction && entity.hasCurrentRoom)
+        {
+            this.OnCurrentRoom(entity, entity.currentRoom.roomId);
+        }
     }
 
     public void OnCurrentRoom(CoreEntity entity, int roomId)

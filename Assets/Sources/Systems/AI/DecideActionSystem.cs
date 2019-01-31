@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Entitas;
 using System;
+using System.Threading;
+
 
 public class DecideActionSystem : IExecuteSystem
 {
@@ -37,18 +39,29 @@ public class DecideActionSystem : IExecuteSystem
                 roomDirtyness.Add(room.roomId.value, room.dirtLevel.value);
             }
             State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, flatmate.aIBehaviour.value, flatmate.currentRoom.roomId);
-            AIAction nextAction = decideNextAction(s);
-            if (nextAction == null)
-            {
-                return;
-            }
-            if (nextAction.room != flatmate.currentRoom.roomId)
-            {
-                command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
-            }
-            command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, nextAction.action.DefaultLength - 1 + 2 * (float)rnd.NextDouble());
+
+            Thread decideThread = new Thread(() => runThread(flatmate, s));
+            decideThread.Start();
+
 
         }
+    }
+
+    private void runThread(CoreEntity flatmate, State state)
+    {
+        AIAction nextAction = decideNextAction(state);
+        flatmate.currentRoom.roomId += 1;
+        if (nextAction == null)
+        {
+            return;
+        }
+        /* 
+        if (nextAction.room != flatmate.currentRoom.roomId)
+        {
+            command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
+        }
+        command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, nextAction.action.DefaultLength - 1 + 2 * (float)rnd.NextDouble());
+        */
     }
 
     private AIAction decideNextAction(State s)
