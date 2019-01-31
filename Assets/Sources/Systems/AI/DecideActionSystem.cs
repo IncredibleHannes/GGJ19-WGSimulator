@@ -13,158 +13,34 @@ public class DecideActionSystem : IExecuteSystem
     readonly IGroup<CoreEntity> busyFlatmates;
     readonly IGroup<CoreEntity> rooms;
 
-    private int SEARCH_DEPTH = 3;
-    private int DEFAULT_ACTION_LENGTH = 5;
-
-    System.Random rnd = new System.Random();
-
     public DecideActionSystem(Contexts contexts)
     {
         context = contexts.core;
         command = contexts.command;
-        rooms = context.GetGroup(CoreMatcher.RoomId);
+        rooms = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.Room, CoreMatcher.RoomId, CoreMatcher.DirtLevel));
         busyFlatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.Flatmate, CoreMatcher.ActiveAction, CoreMatcher.CurrentRoom));
-        flatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.AIBehaviour, CoreMatcher.Flatmate, CoreMatcher.Motivation, CoreMatcher.Fun, CoreMatcher.CurrentRoom, CoreMatcher.Opinion).NoneOf(CoreMatcher.Player, CoreMatcher.ActiveAction));
+        flatmates = context.GetGroup(CoreMatcher.AllOf(CoreMatcher.AIBehaviour, CoreMatcher.Flatmate, CoreMatcher.Motivation, CoreMatcher.Fun, CoreMatcher.CurrentRoom, CoreMatcher.Opinion).NoneOf(CoreMatcher.Player, CoreMatcher.ActiveAction, CoreMatcher.AIDeciding));
     }
 
     public void Execute()
     {
-        foreach (var flatmate in flatmates)
+        foreach (var flatmate in flatmates.GetEntities())
         {
             float totalDirtyness = 0;
-            Dictionary<int, float> roomDirtyness = new Dictionary<int, float>();
+            Dictionary<int, AIRoom> aiRooms = new Dictionary<int, AIRoom>();
             foreach (var room in rooms)
             {
                 totalDirtyness += room.dirtLevel.value;
-                roomDirtyness.Add(room.roomId.value, room.dirtLevel.value);
+                aiRooms.Add(room.roomId.value, new AIRoom(room.roomType.room, room.dirtLevel.value, room.roomId.value));
             }
-            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, roomDirtyness, totalDirtyness, flatmate.aIBehaviour.value, flatmate.currentRoom.roomId);
-
-            Thread decideThread = new Thread(() => runThread(flatmate, s));
-            decideThread.Start();
-
-
-        }
-    }
-
-    private void runThread(CoreEntity flatmate, State state)
-    {
-        AIAction nextAction = decideNextAction(state);
-        flatmate.currentRoom.roomId += 1;
-        if (nextAction == null)
-        {
-            return;
-        }
-        /* 
-        if (nextAction.room != flatmate.currentRoom.roomId)
-        {
-            command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
-        }
-        command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, nextAction.action.DefaultLength - 1 + 2 * (float)rnd.NextDouble());
-        */
-    }
-
-    private AIAction decideNextAction(State s)
-    {
-        var maxScore = float.MinValue;
-        AIAction bestAction = null;
-        var possibleAcions = getPossibleActions(s);
-        possibleAcions.Shuffle();
-        foreach (var action in possibleAcions)
-        {
-            float score = findBestAction(applyAction(action, s), SEARCH_DEPTH);
-            if (maxScore < score)
+            List<AIFlatmate> aIFlatmates = new List<AIFlatmate>();
+            foreach (var busyFlatmate in busyFlatmates)
             {
-                maxScore = score;
-                bestAction = action;
+                aIFlatmates.Add(new AIFlatmate(busyFlatmate.activeAction.value, busyFlatmate.currentRoom.roomId));
             }
+            State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, totalDirtyness, flatmate.aIBehaviour.value, flatmate.currentRoom.roomId, aiRooms, aIFlatmates);
+            AIDecisionService.decideNextAction(s, flatmate.id.value);
+            flatmate.AddAIDeciding(null);
         }
-        return bestAction;
-
-    }
-
-    private List<AIAction> getPossibleActions(State s)
-    {
-        var result = new List<AIAction>();
-        foreach (var action in Action.Actions)
-        {
-            if (-(action.MotivationPerSecond * action.DefaultLength) <= s.motivation)
-            {
-                foreach (var room in rooms)
-                {
-                    bool roomIsDirty = !(action.DirtPerSecond < 0) || room.dirtLevel.value + (action.DirtPerSecond * action.DefaultLength) > 0;
-                    bool actionAlreadyDone = false;
-                    foreach (var flatmate in busyFlatmates)
-                    {
-                        actionAlreadyDone = actionAlreadyDone || (flatmate.activeAction.value.Title == action.Title && flatmate.currentRoom.roomId == room.roomId.value);
-                    }
-                    if (Array.Exists(action.AllowedRoomTypes, roomType => roomType == room.roomType.room.Type) && roomIsDirty && !actionAlreadyDone)
-                        result.Add(new AIAction(action, room.roomId.value));
-                }
-            }
-
-        }
-        return result;
-    }
-
-    private float calculateScore(AIAction a, State s)
-    {
-        var newState = applyAction(a, s);
-        float opinion = 0;
-        foreach (KeyValuePair<int, float> entry in s.opinion)
-        {
-            opinion += entry.Value;
-        }
-        return s.motivation * s.aiBehaviour.motivationMultiplier + s.fun * s.aiBehaviour.funMultiplier + s.aiBehaviour.opinionMultiplier * opinion - s.totalDirtyness * s.aiBehaviour.dirtynessMultiplier;
-    }
-
-    private float findBestAction(State s, int searchDepth)
-    {
-        var maxScore = float.MinValue;
-        if (searchDepth <= 0)
-        {
-            foreach (var action in getPossibleActions(s))
-            {
-                var score = calculateScore(action, s);
-                if (maxScore < score)
-                {
-                    maxScore = score;
-                }
-            }
-            return maxScore;
-        }
-        foreach (var action in getPossibleActions(s))
-        {
-
-            float score = findBestAction(applyAction(action, s), searchDepth - 1);
-            if (maxScore < score)
-            {
-                maxScore = score;
-            }
-        }
-        return maxScore;
-    }
-
-    private State applyAction(AIAction a, State s)
-    {
-        float newMotivation = a.action.MotivationPerSecond * a.action.DefaultLength + s.motivation;
-        float newFun = a.action.FunPerSecond * a.action.DefaultLength + s.fun;
-        float madeDirt = a.action.DirtPerSecond * a.action.DefaultLength;
-        Dictionary<int, float> newOpinion = s.opinion;
-        if (!s.roomDirtyness.ContainsKey(s.currentRoom))
-        {
-            return s;
-        }
-        if (s.roomDirtyness[s.currentRoom] + madeDirt <= 0)
-        {
-            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, s.totalDirtyness, s.aiBehaviour, a.room);
-        }
-        else
-        {
-            float newDirtyness = madeDirt + s.totalDirtyness;
-            s.roomDirtyness[s.currentRoom] += madeDirt;
-            return new State(newMotivation, newFun, newOpinion, s.roomDirtyness, newDirtyness, s.aiBehaviour, a.room);
-        }
-
     }
 }

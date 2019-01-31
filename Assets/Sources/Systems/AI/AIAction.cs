@@ -8,4 +8,10 @@ public class AIAction
         this.action = a;
         this.room = room;
     }
+
+    public AIAction(AIAction a)
+    {
+        this.action = a.action;
+        this.room = a.room;
+    }
 }
