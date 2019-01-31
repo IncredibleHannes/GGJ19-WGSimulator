@@ -10,40 +10,42 @@ public static class CoreComponentsLookup {
 
     public const int ActionDuration = 0;
     public const int ActiveAction = 1;
-    public const int AIBehaviour = 2;
-    public const int CoreDestroyedListener = 3;
-    public const int CurrentRoom = 4;
-    public const int CurrentRoomListener = 5;
-    public const int Destroyed = 6;
-    public const int DirtLevel = 7;
-    public const int DirtLevelListener = 8;
-    public const int Flat = 9;
-    public const int Flatmate = 10;
-    public const int FlatmateId = 11;
-    public const int Fun = 12;
-    public const int FunListener = 13;
-    public const int Id = 14;
-    public const int LastCleanup = 15;
-    public const int Motivation = 16;
-    public const int MotivationListener = 17;
-    public const int Name = 18;
-    public const int Opinion = 19;
-    public const int OpinionListener = 20;
-    public const int OpinionModifier = 21;
-    public const int Player = 22;
-    public const int Position = 23;
-    public const int Room = 24;
-    public const int RoomId = 25;
-    public const int RoomType = 26;
-    public const int TimeOfDay = 27;
-    public const int TimeOfDayListener = 28;
-    public const int TimeSinceLastTick = 29;
+    public const int ActiveActionListener = 2;
+    public const int AIBehaviour = 3;
+    public const int CoreDestroyedListener = 4;
+    public const int CurrentRoom = 5;
+    public const int CurrentRoomListener = 6;
+    public const int Destroyed = 7;
+    public const int DirtLevel = 8;
+    public const int DirtLevelListener = 9;
+    public const int Flat = 10;
+    public const int Flatmate = 11;
+    public const int FlatmateId = 12;
+    public const int Fun = 13;
+    public const int FunListener = 14;
+    public const int Id = 15;
+    public const int LastCleanup = 16;
+    public const int Motivation = 17;
+    public const int MotivationListener = 18;
+    public const int Name = 19;
+    public const int Opinion = 20;
+    public const int OpinionListener = 21;
+    public const int OpinionModifier = 22;
+    public const int Player = 23;
+    public const int Position = 24;
+    public const int Room = 25;
+    public const int RoomId = 26;
+    public const int RoomType = 27;
+    public const int TimeOfDay = 28;
+    public const int TimeOfDayListener = 29;
+    public const int TimeSinceLastTick = 30;
 
-    public const int TotalComponents = 30;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "ActionDuration",
         "ActiveAction",
+        "ActiveActionListener",
         "AIBehaviour",
         "CoreDestroyedListener",
         "CurrentRoom",
@@ -77,6 +79,7 @@ public static class CoreComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(ActionDurationComponent),
         typeof(ActiveActionComponent),
+        typeof(ActiveActionListenerComponent),
         typeof(AIBehaviourComponent),
         typeof(CoreDestroyedListenerComponent),
         typeof(CurrentRoomComponent),
