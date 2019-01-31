@@ -30,7 +30,7 @@ public class ApplyDecitionSystem : IExecuteSystem
                 var nextAction = AIDecisionService.popResult(flatmate.flatmateId.value);
                 if (nextAction == null)
                 {
-                    flatmate.RemoveAIDeciding();
+                    flatmate.isAIDeciding = false;
                     return;
                 }
                 if (nextAction.room != flatmate.currentRoom.roomId)
@@ -38,7 +38,7 @@ public class ApplyDecitionSystem : IExecuteSystem
                     command.CreateEntity().AddEnterRoomCommand(nextAction.room, flatmate.flatmateId.value);
                 }
                 command.CreateEntity().AddStartActionCommand(nextAction.action, flatmate.flatmateId.value, nextAction.action.DefaultLength - 1 + 2 * (float)rnd.NextDouble());
-                flatmate.RemoveAIDeciding();
+                flatmate.isAIDeciding = false;
             }
         }
 

@@ -40,7 +40,7 @@ public class DecideActionSystem : IExecuteSystem
             }
             State s = new State(flatmate.motivation.value, flatmate.fun.value, flatmate.opinion.value, totalDirtyness, flatmate.aIBehaviour.value, flatmate.currentRoom.roomId, aiRooms, aIFlatmates);
             AIDecisionService.decideNextAction(s, flatmate.id.value);
-            flatmate.AddAIDeciding(null);
+            flatmate.isAIDeciding = true;
         }
     }
 }

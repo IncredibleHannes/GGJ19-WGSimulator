@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class CoreEntity {
 
-    public AIDecidingComponent aIDeciding { get { return (AIDecidingComponent)GetComponent(CoreComponentsLookup.AIDeciding); } }
-    public bool hasAIDeciding { get { return HasComponent(CoreComponentsLookup.AIDeciding); } }
+    static readonly AIDecidingComponent aIDecidingComponent = new AIDecidingComponent();
 
-    public void AddAIDeciding(Action newValue) {
-        var index = CoreComponentsLookup.AIDeciding;
-        var component = (AIDecidingComponent)CreateComponent(index, typeof(AIDecidingComponent));
-        component.value = newValue;
-        AddComponent(index, component);
-    }
+    public bool isAIDeciding {
+        get { return HasComponent(CoreComponentsLookup.AIDeciding); }
+        set {
+            if (value != isAIDeciding) {
+                var index = CoreComponentsLookup.AIDeciding;
+                if (value) {
+                    var componentPool = GetComponentPool(index);
+                    var component = componentPool.Count > 0
+                            ? componentPool.Pop()
+                            : aIDecidingComponent;
 
-    public void ReplaceAIDeciding(Action newValue) {
-        var index = CoreComponentsLookup.AIDeciding;
-        var component = (AIDecidingComponent)CreateComponent(index, typeof(AIDecidingComponent));
-        component.value = newValue;
-        ReplaceComponent(index, component);
-    }
-
-    public void RemoveAIDeciding() {
-        RemoveComponent(CoreComponentsLookup.AIDeciding);
+                    AddComponent(index, component);
+                } else {
+                    RemoveComponent(index);
+                }
+            }
+        }
     }
 }
 
